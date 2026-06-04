@@ -1,0 +1,15 @@
+{
+    "prefix": "/",
+    "color_purple": "0xb700ff",
+    "color_blue": "0x242424",
+    "special_keywords": [
+        "importante",
+        "ajuda",
+        "btf",
+        "admin"
+    ],
+    "activity_name": "!help | BTF Bot",
+    "welcome_message": "Bem-vindo ao servidor!",
+    "xp_min": 5,
+    "xp_max": 15
+}

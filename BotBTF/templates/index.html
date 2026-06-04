@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTF Bot Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BTF Bot Control Panel</h1>
+            <p>Ajuste seu bot em tempo real</p>
+        </header>
+
+        <main class="dashboard-grid">
+            <section class="config-panel">
+                <h2>Configurações Gerais</h2>
+                <div class="input-group">
+                    <label>Prefixo do Bot</label>
+                    <input type="text" id="prefix" value="{{ config.prefix }}" oninput="updateRealtime('prefix', this.value)">
+                </div>
+                <div class="input-group">
+                    <label>Atividade (Presença)</label>
+                    <input type="text" id="activity_name" value="{{ config.activity_name }}" oninput="updateRealtime('activity_name', this.value)">
+                </div>
+                
+                <div class="color-pickers">
+                    <div class="input-group">
+                        <label>Cor Primária (Purple)</label>
+                        <input type="color" id="color_purple_picker" value="#9b59b6" oninput="updateColor('color_purple', this.value)">
+                        <input type="text" id="color_purple" value="{{ config.color_purple }}">
+                    </div>
+                    <div class="input-group">
+                        <label>Cor Secundária (Blue)</label>
+                        <input type="color" id="color_blue_picker" value="#3498db" oninput="updateColor('color_blue', this.value)">
+                        <input type="text" id="color_blue" value="{{ config.color_blue }}">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Palavras-Chave (separadas por vírgula)</label>
+                    <input type="text" id="special_keywords" value="{{ config.special_keywords|join(', ') }}" oninput="updateKeywords(this.value)">
+                </div>
+            </section>
+
+            <section class="preview-panel">
+                <h2>Live Preview (Embed)</h2>
+                <div id="embed-preview" class="discord-embed" style="border-left-color: #9b59b6;">
+                    <div class="embed-content">
+                        <div class="embed-author">BTF Bot</div>
+                        <div class="embed-title">Exemplo de Título</div>
+                        <div class="embed-description">Este é um exemplo de como as mensagens do bot aparecerão no Discord. O prefixo atual é: <span id="preview-prefix">{{ config.prefix }}</span></div>
+                    </div>
+                </div>
+                <div class="status-indicator">
+                    <span class="dot"></span> Sistema Sincronizado
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
